@@ -1,0 +1,61 @@
+%%%%% For preprocessing data see scripts in  the ENST-public dir.
+%%%%% For whole process see.  traindoit
+
+
+% preprocess annotation.  does same as mergeDrumTypesENST but for an event within combination window
+% instead of one sd and one bd event with same timestamp, prints one comined event bd_sd
+
+combineDrumTypesENST(songURI) -> function called in trainPositionalProbs
+% output is .txt.combined
+
+%use timestamps in file *.notePart.combined for files
+
+%% training all.  
+function traindoit
+NOTE: obs probs have to be trained as well after combineDrumTypesENST is run since this assures that the spectrum is taken of snare-only  and bass-only hits 
+
+
+
+
+% decode
+
+decodeAlgorithm( transMatrixFull, tableObsProbs, positionalProbs, V, P);
+
+% the logic for one iteration itself: 
+function decode() 
+1. construct A table based on C. 
+2. construct B table - these give the model without the transitions.
+3. summ over A velocities and multiply by B
+4. take max drum type. 
+
+
+%%% main logic of decoding. does write results of decoded sequence into file: 
+transcr.pos - 
+transcr.vel -
+transcr.sd
+transcr.bd
+
+doitOneSong()
+
+
+
+
+%%%%% evaluation: 
+eval/evalPrecRecallForOneSong
+
+use mergeDrumTypesENST.
+% the file is .txt.bd and .txt.sd
+
+if using clasifier with combined classes consider its output as two detections of the two types (e.g. bd and sd): 
+then compare the same way as with no combinations 
+
+
+One can exlude MIDIs from training by commenting a code snippet in 
+trainObsLiks 
+and can exclude them from evaluation by commenting a code snippet in 
+evalPrecRecallAllSongs
+
+------------
+
+
+
